@@ -11,24 +11,20 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/test", (req, res) => {
+router.get("/cortes", (req, res) => {
   res.json({
-    hello: "test!",
+    hello: "hi!",
   });
 });
 
-router.post("/testpost", (req, res) => {
-  res.json({
-    hello: "hit the POST!",
-  });
-});
 
 router.post("/cortes", (req, res) => {
   const result = sc.start(req.body);
   res.json({
-    result,
+    ...result
   });
 });
+
 app.use(express.json()); 
 app.use(`/.netlify/functions/api`, router);
 

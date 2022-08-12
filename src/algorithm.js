@@ -39,7 +39,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
   let cutListSumCheck = 0;
   let finalListSumCheck = 0;
   let testCutListString = "";
-  let cutListString = " -> ";
+  let cutListString = "";
 
   for (let i = 0; i < myCutListLength; i++) {
     cutListString =
@@ -48,7 +48,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
       myCutList[i].length +
       " x " +
       myCutList[i].amount +
-      " pcs. ";
+      " pcs ";
     cutListSumCheck =
       cutListSumCheck + myCutList[i].length * myCutList[i].amount;
 
@@ -64,7 +64,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
   let percentageWaste;
 
   let cutNo = 0;
-  let finalListString = "";
+  let finalListString = [];
   let resultString = "";
 
   for (let i = 0; i < myFinalListLength; i++) {
@@ -73,9 +73,10 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
     patternLength = 0;
     for (let j = 0; j < Object.keys(myFinalList[i]).length; j++) {
       patternLength = patternLength + myFinalList[i][j];
-      singlePatternString = singlePatternString + "" + myFinalList[i][j] + ", ";
+      singlePatternString = singlePatternString + "" + myFinalList[i][j] + ",";
       finalListSumCheck = finalListSumCheck + myFinalList[i][j];
     }
+    singlePatternString = singlePatternString.slice(0, -1);
     patternWaste = myMaxCutLength - patternLength;
     allPatternsWaste = allPatternsWaste + patternWaste;
     allPatternsLength = allPatternsLength + patternLength;
@@ -87,17 +88,12 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
       cutNo = i + 1;
     }
 
-    finalListString =
-      finalListString +
-      " " +
-      cutNo +
-      ") " +
-      singlePatternString +
-      " = " +
-      patternLength +
-      ": waste = " +
-      patternWaste +
-      ";";
+    finalListString.push({
+      keyCut: Number(cutNo),
+      amount: singlePatternString,
+      patternLength,
+      patternWaste,
+    });
   }
 
   percentageWaste = (allPatternsWaste / allPatternsLength) * 100;
@@ -106,21 +102,20 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
     cutNo = cutNo.substring(1, cutNo.length);
   }
   let endingString = {
-    " Total material required: " : myMaxCutLength ,
-    " x " : cutNo ,
-    " pcs. = " : myMaxCutLength * cutNo ,
-    " Total waste: " : allPatternsWaste ,
-    " (%)" : parseFloat(percentageWaste).toPrecision(4) 
-  }
-    
+    maxCutLength: myMaxCutLength,
+    numberOfMaterial: Number(cutNo),
+    pcs: myMaxCutLength * cutNo,
+    totalWaste: allPatternsWaste,
+    percentageWaste: Number(parseFloat(percentageWaste).toPrecision(4)),
+  };
 
-  resultString ={
-    "Length of material to be cut: " : myMaxCutLength,
-    " Order: " : cutListString ,
-    " Material loss per cut is not counted! Cutting: " : finalListString ,
-    "ending": endingString
-  }
-    
+  resultString = {
+    maxCutLength: myMaxCutLength,
+    ...endingString,
+    initialCutList: myCutList,
+    listOfCutsFinal: finalListString,
+  };
+
   return resultString;
 };
 
