@@ -105,18 +105,14 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
   if (cutNo <= 9) {
     cutNo = cutNo.substring(1, cutNo.length);
   }
-  let endingString =
-    " Total material required: " +
-    myMaxCutLength +
-    " x " +
-    cutNo +
-    " pcs. = " +
-    myMaxCutLength * cutNo +
-    " Total waste: " +
-    allPatternsWaste +
-    " (" +
-    parseFloat(percentageWaste).toPrecision(4) +
-    "%)";
+  let endingString = {
+    " Total material required: " : myMaxCutLength ,
+    " x " : cutNo ,
+    " pcs. = " : myMaxCutLength * cutNo ,
+    " Total waste: " : allPatternsWaste ,
+    " (%)" : parseFloat(percentageWaste).toPrecision(4) 
+  }
+    
 
   resultString ={
     "Length of material to be cut: " : myMaxCutLength,
