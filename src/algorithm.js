@@ -39,8 +39,8 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
   let cutListSumCheck = 0;
   let finalListSumCheck = 0;
   let testCutListString = "";
+  let cutListString = " -> ";
 
-  let cutListString = "\n";
   for (let i = 0; i < myCutListLength; i++) {
     cutListString =
       cutListString +
@@ -48,7 +48,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
       myCutList[i].length +
       " x " +
       myCutList[i].amount +
-      " pcs.\n";
+      " pcs. ";
     cutListSumCheck =
       cutListSumCheck + myCutList[i].length * myCutList[i].amount;
 
@@ -89,7 +89,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
 
     finalListString =
       finalListString +
-      "\n" +
+      " " +
       cutNo +
       ") " +
       singlePatternString +
@@ -99,31 +99,31 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
       patternWaste +
       ";";
   }
+
   percentageWaste = (allPatternsWaste / allPatternsLength) * 100;
 
   if (cutNo <= 9) {
     cutNo = cutNo.substring(1, cutNo.length);
   }
   let endingString =
-    "\n\n" +
-    "Total material required: " +
+    " Total material required: " +
     myMaxCutLength +
     " x " +
     cutNo +
     " pcs. = " +
     myMaxCutLength * cutNo +
-    "\nTotal waste: " +
+    " Total waste: " +
     allPatternsWaste +
     " (" +
     parseFloat(percentageWaste).toPrecision(4) +
     "%)";
 
   resultString =
-    "Length of material to be cut:\n" +
+    "Length of material to be cut: " +
     myMaxCutLength +
-    "\n\nOrder:" +
+    " Order: " +
     cutListString +
-    "\nMaterial loss per cut is not counted!\nCutting:" +
+    " Material loss per cut is not counted! Cutting: " +
     finalListString +
     endingString;
   return resultString;
