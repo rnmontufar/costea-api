@@ -118,14 +118,13 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
     parseFloat(percentageWaste).toPrecision(4) +
     "%)";
 
-  resultString =
-    "Length of material to be cut: " +
-    myMaxCutLength +
-    " Order: " +
-    cutListString +
-    " Material loss per cut is not counted! Cutting: " +
-    finalListString +
-    endingString;
+  resultString ={
+    "Length of material to be cut: " : myMaxCutLength,
+    " Order: " : cutListString ,
+    " Material loss per cut is not counted! Cutting: " : finalListString ,
+    "ending": endingString
+  }
+    
   return resultString;
 };
 
