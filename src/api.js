@@ -24,9 +24,9 @@ router.post("/testpost", (req, res) => {
 });
 
 router.get("/cortes", (req, res) => {
-  sc.start();
+  const result = sc.start();
   res.json({
-    hello: "cortes!",
+    result,
   });
 });
 

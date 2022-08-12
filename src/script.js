@@ -10,6 +10,7 @@ class cut {
 
 const start = () => {
   let cutList = getInputList();
+  
   //maxCutLength
   let maxCutLength = 60;
 
@@ -29,11 +30,11 @@ const start = () => {
   }
 
   cutList = cutList.sort(compareDesc);
-
-  al.algorithm(cutList, maxCutLength);
+  const result = al.algorithm(cutList, maxCutLength);
+  return result;
 }
 
-function inputIsZeroOrNull(myCutList, myMaxCutLength) {
+const inputIsZeroOrNull = (myCutList, myMaxCutLength) => {
   for (i = 0; i < myCutListLength; i++) {
     if (myCutList[i].length == 0) {
       return true;
@@ -48,7 +49,7 @@ function inputIsZeroOrNull(myCutList, myMaxCutLength) {
   return false;
 }
 
-function inputExceedsMaxCutLength(myCutList, myMaxCutLength) {
+const inputExceedsMaxCutLength = (myCutList, myMaxCutLength) => {
   myCutListLength = myCutList.length;
   for (i = 0; i < myCutListLength; i++) {
     if (myCutList[i].length > myMaxCutLength) {
@@ -58,7 +59,7 @@ function inputExceedsMaxCutLength(myCutList, myMaxCutLength) {
   return false;
 }
 
-function inputRepeatedLengths(myCutList) {
+const inputRepeatedLengths = (myCutList) => {
   myCutListLength = myCutList.length;
   //check if there are no repeated lengths
   for (i = 0; i < myCutListLength; i++) {
@@ -74,7 +75,7 @@ function inputRepeatedLengths(myCutList) {
   return false;
 }
 
-function getInputList() {
+const getInputList = () => {
   //Cantidad de cortes
   let listLength = 3;
   let cutLength;
@@ -106,7 +107,7 @@ function getInputList() {
   return cutList2;
 }
 
-function compareDesc(a, b) {
+const compareDesc = (a, b) => {
   if (a.length > b.length) {
     return -1;
   }
