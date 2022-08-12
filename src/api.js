@@ -23,13 +23,13 @@ router.post("/testpost", (req, res) => {
   });
 });
 
-router.get("/cortes", (req, res) => {
-  const result = sc.start();
+router.post("/cortes", (req, res) => {
+  const result = sc.start(req.body);
   res.json({
     result,
   });
 });
-
+app.use(express.json()); 
 app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
