@@ -90,7 +90,7 @@ const printResults = (myCutList, myFinalList, myMaxCutLength) => {
 
     finalListString.push({
       keyCut: Number(cutNo),
-      amount: singlePatternString,
+      cutsList: singlePatternString,
       patternLength,
       patternWaste,
     });
